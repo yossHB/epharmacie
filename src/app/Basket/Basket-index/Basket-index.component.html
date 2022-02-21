@@ -1,0 +1,92 @@
+<div class="mt-8">
+	<div class="table-inside">
+		<table>
+			<thead class="tab-header">
+				<tr class="border text-left">
+					<th>
+						<span >Image</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Product</span>
+					</th>
+					<th>
+						<span class="text-gray-800">Price</span>
+					</th>
+
+					<th>
+						<span class="text-gray-800">Quantity</span>
+					</th>
+
+					<th>
+						<span class="text-gray-800">Total</span>
+					</th>
+					<th class="text-right">Remove</th>
+				</tr>
+			</thead>
+			<tbody class="height">
+				<tr *ngFor="let order of orders" class="border">
+					<td style="width: 250px;">
+            <a>
+              <img src="assets/images/products/{{order?.productImage}}" alt="Product" />
+            </a>
+					</td>
+          <td>
+            <span>{{order?.productName}}</span>
+          </td>
+					<td>
+						<span>${{order?.price}}</span>
+					</td>
+          <td>
+            <div class="table-wrapper">
+              <table class="fl-table">
+                <tr>
+                  <th><button (click)="Decrease(order)"> - </button></th>
+                  <th> <span>{{order?.quantity}}</span> </th>
+                  <th><button (click)="Increase(order)"> + </button></th>
+                </tr>
+              </table>
+            </div>
+          </td>
+					<td>
+						<span>${{order?.price * order?.quantity}}</span>
+					</td>
+					<td class="text-center">
+            <button class="delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="coptot">
+    <div class="coupon text-left">
+      <div>
+        <button class="btn">UPDATE CART</button>
+        <button class="btn2">CONTINUE SHOPPING</button>
+      </div>
+      <h4>Coupon</h4>
+      <p>Enter your coupon code if you have one.</p>
+      <input placeholder="Coupon Code" class="inputCoupon">
+      <button class="btn">APPLY COUPON</button>
+    </div>
+    <div class="TOTAL text-right">
+      <h4>CART TOTALS</h4>
+      <br>
+      <hr>
+      <table class="pricebox">
+        <tr>
+          <td>Subtotal</td>
+          <td>${{Total()}}</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td>${{Total()}}</td>
+        </tr>
+        <tr>
+          <button class="btn3">PROCEED TO CHECKOUT</button>
+        </tr>
+      </table>
+    </div>
+</div>

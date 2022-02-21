@@ -1,0 +1,33 @@
+<div>
+  <mat-sidenav-container class="kl-sidenav-container">
+    <mat-sidenav-content>
+      <header class="ll_header bg-gray-50 shadow">
+        <div class="container">
+          <div class="flex items-center">
+            <div class="flex items-center">
+              <a class="logo" [routerLink]="['']"><img src="assets/images/logo.png" alt="Logo" /></a>
+            </div>
+            <div class="items-center flex ml-auto">
+              <button mat-icon-button>
+                <mat-icon>notifications</mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon>account_circle</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div>
+        <div class="container">
+            <div class="col-span-12 xl:col-span-9 py-10">
+              <router-outlet></router-outlet>
+            </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+<ll-feature></ll-feature>
+<ll-footer></ll-footer>
