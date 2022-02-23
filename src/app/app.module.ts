@@ -6,11 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { AdminComponent } from './admin/admin.component';
+import { UserComponent } from './user/user.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { formatWithOptions } from 'util';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, SharedModule, NgxSkeletonLoaderModule],
+  declarations: [AppComponent, AdminComponent, UserComponent, ForbiddenComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule ,SharedModule,FormsModule,NgxSkeletonLoaderModule,HttpClientModule,ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {}
