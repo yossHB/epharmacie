@@ -1,12 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../model/user';
 import { UserAuthService } from './user-auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UserServices {
   //[x: string]: any;
   PATH_OF_API = 'http://localhost:8080';
 
@@ -15,15 +16,12 @@ export class UserService {
   };
   constructor(
     private httpclient: HttpClient,
-    private userAuthService: UserAuthService
+    private userAuthService: UserAuthService,
+    private http: HttpClient
   ) {}
-
-  login(username="user5",password="1234"): Observable<Object>  {
-    //console.log(loginData);
-    return this.httpclient.post(`${this.PATH_OF_API}/login`, {
-      username,
-      password
-    }, this.httpOptions);
+ 
+  login(username: string,password:string): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.PATH_OF_API}/login`, {username,password}, { observe: 'response'});
   }
 
   register(username,password,confirmedPassword): Observable<Object>  {

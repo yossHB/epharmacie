@@ -7,6 +7,9 @@ import { SignupComponent } from './signup/signup.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UserServices } from '../_services/user.service';
+import { AuthInterceptor } from './auth.interceptor';
 
 
 @NgModule({
@@ -16,8 +19,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     AuthRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
  
-  ]
+  ],
+  providers: [UserServices, 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
 })
 export class AuthModule { }

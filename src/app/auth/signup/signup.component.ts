@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
-import { UserService } from 'src/app/_services/user.service';
+import { UserServices } from 'src/app/_services/user.service';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private userService: UserService,
+    private userService: UserServices,
     private userAuthService: UserAuthService,
     private router: Router,
   ) {}
