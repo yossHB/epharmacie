@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm,ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { UserAuthService } from 'src/app/_services/user-auth.service';
 import { UserService } from 'src/app/_services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,44 +13,55 @@ import { UserService } from 'src/app/_services/user.service';
 
 })
 export class LoginComponent implements OnInit {
+  isInvalid: boolean;
+  isLogout: boolean;
+  submitted = false;
   form: any = {
-    username:null,
-    password: null
+      username: '',
+      password: '',
   };
+
+  returnUrl = '/';          
   constructor(
     private userService: UserService,
     private userAuthService: UserAuthService,
     private router: Router,
+    private route: ActivatedRoute
 
   ) {}
 
   ngOnInit(): void {
+    let params = this.route.snapshot.queryParamMap;
+    this.isLogout = params.has('logout');
+    this.returnUrl = params.get('returnUrl');
   }
   
 
-  onSubmit() : void {
-    const { username, password} = this.form;
-    console.log(username,password);
-    this.userService.login(username,password).subscribe(
-      (response: any) => {  
-        console.log('first step '+ response);
-        this.userAuthService.setRoles(response.user.role);
-        this.userAuthService.setToken(response.jwtToken);
-        console.log('first step in login');
-        console.log(response);
+  onSubmit() {
+    this.submitted = true;
+    this.router.navigate(['/']);
+    this.userService.login(this.form).subscribe(
+        user => {
+            if (user) {
+              console.log(user);
+            this.returnUrl = '/auth/signup';
+                
 
-        const role = response.user.role[0].roleName;
-        if (role === 'ADMIN') {
-          this.router.navigate(['https://www.youtube.com/watch?v=1GUsmQKMnuU']);
-        } else {
-          this.router.navigate(['/']);
+            this.router.navigate(['/']);
+          
+            } else {
+                this.isLogout = false;
+                this.isInvalid = true;
+            }
+
         }
-      },
-      (error) => {
-        console.log(error);
-      }
     );
-  }
+}
+fillLoginFields(u: any, p: any) {
+  this.form.username = u;
+  this.form.password = p;
+  this.onSubmit();
+}
 }
 
 /*

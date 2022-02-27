@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/model/product.model';
+import { CatalogueService } from 'src/app/_services/catalogue.service';
 import { productsDB } from '../../shared/data/products';
 
 @Component({
@@ -9,13 +11,24 @@ import { productsDB } from '../../shared/data/products';
 export class ProductListComponent implements OnInit {
   isLoaded: boolean;
   advanceSearchExpanded: boolean = false;
-  products = [];
-  constructor() {}
+  products :Array<Product>;
+
+  constructor(public catalService:CatalogueService,) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.products = productsDB.Product;
-      this.isLoaded = true
-    }, 8000)
+    this.getProducts();
+
+    
+  }
+
+  private getProducts() {
+    this.catalService.getResource(this.catalService.host+"/articles")
+      .subscribe((data:any)=>{
+        this.products=data._embedded.articles;
+        console.log(data._embedded.articles)
+      },err=>{
+        console.log(err);
+      })
+      this.isLoaded= true;
   }
 }

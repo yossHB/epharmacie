@@ -12,9 +12,10 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { formatWithOptions } from 'util';
+import { PaymentComponent } from './payement/payement.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminComponent, UserComponent, ForbiddenComponent],
+  declarations: [AppComponent, AdminComponent, UserComponent, ForbiddenComponent, PaymentComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule ,SharedModule,FormsModule,NgxSkeletonLoaderModule,HttpClientModule,ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
