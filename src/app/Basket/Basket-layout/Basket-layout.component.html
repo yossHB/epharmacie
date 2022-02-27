@@ -5,14 +5,12 @@
         <div class="container">
           <div class="flex items-center">
             <div class="flex items-center">
-              <a class="logo" [routerLink]="['']"><img src="assets/images/logo.png" alt="Logo" /></a>
+              <a class="logo" [routerLink]="['/dashboard']"><img src="assets/images/logo.png" alt="Logo" /></a>
             </div>
             <div class="items-center flex ml-auto">
+
               <button mat-icon-button>
-                <mat-icon>notifications</mat-icon>
-              </button>
-              <button mat-icon-button>
-                <mat-icon>account_circle</mat-icon>
+                <mat-icon [routerLink]="['/dashboard']">account_circle</mat-icon>
               </button>
             </div>
           </div>
@@ -29,5 +27,4 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-<ll-feature></ll-feature>
-<ll-footer></ll-footer>
+

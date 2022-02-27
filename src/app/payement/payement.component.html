@@ -1,0 +1,173 @@
+<div class="col-md-6" *ngIf="false">
+  <form #f="ngForm" (ngSubmit)="onParOrder(f.value)">
+    <div class="form-group">
+      <label class="control-label">Type:</label>
+      <select name="type" ngModel class="form-control">
+        <option value="Visa">Visa</option>
+        <option value="Cmi">Cmi</option>
+        <option value="Cmi">Cmi</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Card Number:</label>
+      <input type="text" name="cardNumber" ngModel class="form-control">
+    </div>
+      <div class="form-group">
+        <label class="control-label">Code Verif:</label>
+        <input type="text" name="codeVerif" ngModel class="form-control">
+      </div>
+      <div class="form-group">
+        <label class="control-label">Amount:</label>
+        <input type="text" name="amount" ngModel class="form-control" [(ngModel)]="currentOrder.totalAmount">
+      </div>
+      <button type="submit" class="btn btn-primary">Pay</button>
+  </form>
+</div>
+<div class="panel {{panelStyle}}" *ngIf mode = 1>
+  <div class="panel-heading">Récap de votre commande</div>
+  <div class="panel-body">
+    <div class="col-md-5">
+      <div class="form-group">
+        <label>Nom du Client :</label>
+        <label>{{orderService.order.client.name}}</label>
+      </div>
+      <div class="form-group">
+        <label>Adresse Client :</label>
+        <label>{{orderService.order.client.address}}</label>
+      </div>
+      <div class="form-group">
+        <label>Tel Client :</label>
+        <label>{{orderService.order.client.phoneNumber}}</label>
+      </div>
+      <div class="form-group">
+        <label>Email :</label>
+        <label>{{orderService.order.client.email}}</label>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <label>Order ID :</label>
+        <label>{{orderService.order.id}}</label>
+      </div>
+      <div class="form-group">
+        <label>Order Date :</label>
+        <label>{{orderService.order.date}}</label>
+      </div>
+    </div>
+
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Désignation</th>
+        <th>Quantité</th>
+        <th>Prix</th>
+      </tr>
+      <tr *ngFor="let p of orderService.order.products">
+        <td>{{p.id}}</td><td>{{p.name}}</td>
+        <td>{{p.quantity|number:'0.2'}}</td>
+        <td>{{p.price|number:'0.2'}}</td>
+      </tr>
+      <tr>
+        <td colspan="3">Total:</td>
+        <td>{{orderService.getTotal()|number:'0.2'}}</td>
+      </tr>
+    </table>
+    <button class="btn btn-success" (click)="onOrder()" *ngIf="!orderService.order.id">Confirmer la commande</button>
+    <button class="btn btn-success" (click)="onPayOrder()" *ngIf="orderService.order.id">Pay Order</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="container">
+
+    <form action="">
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">billing address</h3>
+
+                <div class="inputBox">
+                    <span>full name :</span>
+                    <input type="text" placeholder="john deo">
+                </div>
+                <div class="inputBox">
+                    <span>email :</span>
+                    <input type="email" placeholder="example@example.com">
+                </div>
+                <div class="inputBox">
+                    <span>address :</span>
+                    <input type="text" placeholder="room - street - locality">
+                </div>
+                <div class="inputBox">
+                    <span>city :</span>
+                    <input type="text" placeholder="mumbai">
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>state :</span>
+                        <input type="text" placeholder="india">
+                    </div>
+                    <div class="inputBox">
+                        <span>zip code :</span>
+                        <input type="text" placeholder="123 456">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">payment</h3>
+
+                <div class="inputBox">
+                    <span>cards accepted :</span>
+                    <img src="assets/images/card_img.png" alt="">
+                </div>
+                <div class="inputBox">
+                    <span>name on card :</span>
+                    <input type="text" placeholder="mr. john deo">
+                </div>
+                <div class="inputBox">
+                    <span>credit card number :</span>
+                    <input type="number" placeholder="1111-2222-3333-4444">
+                </div>
+                <div class="inputBox">
+                    <span>exp month :</span>
+                    <input type="text" placeholder="january">
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>exp year :</span>
+                        <input type="number" placeholder="2022">
+                    </div>
+                    <div class="inputBox">
+                        <span>CVV :</span>
+                        <input type="text" placeholder="1234">
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+
+        <input type="submit" value="proceed to checkout" class="submit-btn">
+
+    </form>
+
+</div>    
+    
+
+
+
